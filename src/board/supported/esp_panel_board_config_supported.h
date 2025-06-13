@@ -120,6 +120,7 @@
         + defined(BOARD_VIEWE_UEDX80480050E_WB_A_2) \
         + defined(BOARD_VIEWE_UEDX80480050E_AC_A) \
         + defined(BOARD_VIEWE_UEDX80480070E_WB_A) \
+        + defined(BOARD_GENERIC_ESP32_2432S028R) \
         > 1
         #error "Multiple boards enabled! Please check file `esp_panel_board_supported_conf.h` and make sure only one board is enabled."
     #endif
@@ -225,6 +226,9 @@
         #include "viewe/BOARD_VIEWE_UEDX80480050E_AC_A.h"
     #elif defined(BOARD_VIEWE_UEDX80480070E_WB_A)
         #include "viewe/BOARD_VIEWE_UEDX80480070E_WB_A.h"
+    /* Generic */
+    #elif defined(BOARD_GENERIC_ESP32_2432S028R)
+        #include "generic/BOARD_GENERIC_ESP32_2432S028R.h"
     #else
         #error "Unknown board selected!"
     #endif

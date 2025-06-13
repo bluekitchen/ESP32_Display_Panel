@@ -36,6 +36,11 @@ choice
         bool "VIEWE"
         help
             https://viewedisplay.com/
+
+    config ESP_PANEL_BOARD_MANUFACTURER_GENERIC
+        bool "generic"
+        help
+            generic
 endchoice
 
 choice
@@ -63,5 +68,9 @@ choice
 
     if ESP_PANEL_BOARD_MANUFACTURER_VIEWE || ESP_PANEL_BOARD_MANUFACTURER_ALL
         orsource "./viewe/Kconfig.viewe"
+    endif
+
+    if ESP_PANEL_BOARD_MANUFACTURER_GENERIC || ESP_PANEL_BOARD_MANUFACTURER_ALL
+        orsource "./generic/Kconfig.generic"
     endif
 endchoice

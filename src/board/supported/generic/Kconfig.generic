@@ -1,0 +1,4 @@
+config BOARD_GENERIC_ESP32_2432S028R
+    bool "ESP32_2423S028R"
+    help
+        Generic ESP32 2.8" LCD

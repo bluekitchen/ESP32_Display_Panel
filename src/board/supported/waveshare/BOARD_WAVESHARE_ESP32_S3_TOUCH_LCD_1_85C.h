@@ -95,6 +95,208 @@
 #endif // ESP_PANEL_BOARD_LCD_BUS_TYPE
 
 /**
+ * @brief LCD vendor initialization commands
+ *
+ * Vendor specific initialization can be different between manufacturers, should consult the LCD supplier for
+ * initialization sequence code. Please uncomment and change the following macro definitions. Otherwise, the LCD driver
+ * will use the default initialization sequence code.
+ *
+ * The initialization sequence can be specified in two formats:
+ * 1. Raw format:
+ *    {command, (uint8_t []){data0, data1, ...}, data_size, delay_ms}
+ * 2. Helper macros:
+ *    - ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(delay_ms, command, {data0, data1, ...})
+ *    - ESP_PANEL_LCD_CMD_WITH_NONE_PARAM(delay_ms, command)
+ */
+#define ESP_PANEL_BOARD_LCD_VENDOR_INIT_CMD()                                                                                                \
+{                                                                                                                                            \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x28}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF2, {0x28}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x73, {0xF0}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x7C, {0xD1}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x83, {0xE0}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x84, {0x61}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF2, {0x82}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF1, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB0, {0x56}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB1, {0x4D}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB2, {0x24}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB4, {0x87}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB5, {0x44}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB6, {0x8B}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB7, {0x40}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB8, {0x86}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBA, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBB, {0x08}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBC, {0x08}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBD, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC0, {0x80}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC1, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC2, {0x37}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC3, {0x80}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC4, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC5, {0x37}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC6, {0xA9}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC7, {0x41}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC8, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC9, {0xA9}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xCA, {0x41}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xCB, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD0, {0x91}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD1, {0x68}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD2, {0x68}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF5, {0x00, 0xA5}),                                                                                  \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xDD, {0x4F}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xDE, {0x4F}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF1, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE0, {0xF0, 0x0A, 0x10, 0x09, 0x09, 0x36, 0x35, 0x33, 0x4A, 0x29, 0x15, 0x15, 0x2E, 0x34}),          \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE1, {0xF0, 0x0A, 0x0F, 0x08, 0x08, 0x05, 0x34, 0x33, 0x4A, 0x39, 0x15, 0x15, 0x2D, 0x33}),          \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF3, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE0, {0x07}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE1, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE2, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE3, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE4, {0xE0}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE5, {0x06}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE6, {0x21}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE7, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE8, {0x05}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xE9, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xEA, {0xDA}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xEB, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xEC, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xED, {0x0F}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xEE, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xEF, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF8, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF9, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xFA, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xFB, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xFC, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xFD, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xFE, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xFF, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x60, {0x40}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x61, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x62, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x63, {0x42}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x64, {0xD9}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x65, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x66, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x67, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x68, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x69, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x6A, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x6B, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x70, {0x40}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x71, {0x03}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x72, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x73, {0x42}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x74, {0xD8}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x75, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x76, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x77, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x78, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x79, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x7A, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x7B, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x80, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x81, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x82, {0x06}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x83, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x84, {0xD6}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x85, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x86, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x87, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x88, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x89, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x8A, {0x08}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x8B, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x8C, {0xD8}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x8D, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x8E, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x8F, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x90, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x91, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x92, {0x0A}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x93, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x94, {0xDA}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x95, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x96, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x97, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x98, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x99, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x9A, {0x0C}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x9B, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x9C, {0xDC}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x9D, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x9E, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x9F, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA0, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA1, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA2, {0x05}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA3, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA4, {0xD5}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA5, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA6, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA7, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA8, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xA9, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xAA, {0x07}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xAB, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xAC, {0xD7}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xAD, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xAE, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xAF, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB0, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB1, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB2, {0x09}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB3, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB4, {0xD9}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB5, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB6, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB7, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB8, {0x48}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xB9, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBA, {0x0B}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBB, {0x02}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBC, {0xDB}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBD, {0x04}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBE, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xBF, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC0, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC1, {0x47}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC2, {0x56}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC3, {0x65}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC4, {0x74}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC5, {0x88}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC6, {0x99}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC7, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC8, {0xBB}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xC9, {0xAA}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD0, {0x10}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD1, {0x47}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD2, {0x56}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD3, {0x65}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD4, {0x74}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD5, {0x88}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD6, {0x99}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD7, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD8, {0xBB}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xD9, {0xAA}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF3, {0x01}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0xF0, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x21, {0x00}),                                                                                        \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(120, 0x11, {0x00}),                                                                                      \
+  ESP_PANEL_LCD_CMD_WITH_8BIT_PARAM(0, 0x29, {0x00}),                                                                                        \
+}
+
+/**
  * @brief LCD color configuration
  */
 #define ESP_PANEL_BOARD_LCD_COLOR_BITS          (ESP_PANEL_LCD_COLOR_BITS_RGB565)

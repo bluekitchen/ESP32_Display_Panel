@@ -171,6 +171,16 @@ public:
      * @brief Configuration structure for LCD device
      */
     struct Config {
+
+        // BK Start
+        /**
+        * @brief Hack to support both version of Waveshare ESP32-S3 Touch LCD 1.85C boxes
+        *        On newer version `esp_panel_lcd_vendor_init_cmd_t` must be sent,
+        *        while on older version this is not required / causes LCD to not work
+        */
+        static void setSendVendorInitCmds(bool value);
+        // BK End
+
         /**
          * @brief Convert partial configurations to full configurations
          */

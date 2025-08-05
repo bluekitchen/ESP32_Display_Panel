@@ -101,6 +101,14 @@ utils::vector<int> LCD::BasicBusSpecification::getColorBitsVector() const
     return result;
 }
 
+// BK Start
+static bool isSendVendorInitCmds = true;
+void LCD::Config::setSendVendorInitCmds(bool value)
+{
+    isSendVendorInitCmds = value;
+}
+// BK End
+
 void LCD::Config::convertPartialToFull()
 {
     ESP_UTILS_LOG_TRACE_ENTER_WITH_THIS();
@@ -127,17 +135,26 @@ void LCD::Config::convertPartialToFull()
         printVendorConfig();
 #endif // ESP_UTILS_LOG_LEVEL_DEBUG
         auto &config = std::get<VendorPartialConfig>(vendor);
+// BK Start
+        const esp_panel_lcd_vendor_init_cmd_t *init_cmds = nullptr;
+        unsigned init_cmds_size = 0;
+        ESP_UTILS_LOGI("Send vendor init commands: %s", isSendVendorInitCmds ? "true" : "false");
+        if (isSendVendorInitCmds) {
+            init_cmds = config.init_cmds;
+            init_cmds_size = static_cast<unsigned int>(config.init_cmds_size);
+        }
         vendor = VendorFullConfig{
             .hor_res = config.hor_res,
             .ver_res = config.ver_res,
-            .init_cmds = config.init_cmds,
-            .init_cmds_size = static_cast<unsigned int>(config.init_cmds_size),
+            .init_cmds = init_cmds,
+            .init_cmds_size = init_cmds_size,
             .flags = {
                 .mirror_by_cmd = config.flags_mirror_by_cmd,
                 .enable_io_multiplex = config.flags_enable_io_multiplex,
             },
         };
     }
+// BK End
 
     ESP_UTILS_LOG_TRACE_EXIT_WITH_THIS();
 }
